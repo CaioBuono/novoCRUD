@@ -4,10 +4,27 @@ use Apple\Services\Model\Aluno;
 
 require __DIR__ . '/vendor/autoload.php';
 
-define('TITLE', 'Voltar');
+define('BUTTON', 'Voltar');
+define('TITLE', 'Editar aluno');
+define('SUBMIT', 'Atualizar');
 
+// VALIDACAO DO ID
+if(!isset($_GET['id']) or !is_numeric($_GET['id'])){
+  header('location: index.php?success=false');
+  exit;
+}
+
+// RECUPERA O ALUNO DO BANCO DE DADOS
+$obAluno = Aluno::getAluno($_GET['id']);
+
+// VALIDACAO DO ALUNO
+if(!$obAluno instanceof Aluno){
+  header('location: index.php?success=false');
+  exit;
+}
+
+// VALIDACAO DO POST
 if(isset($_POST['nome'])){
-  $obAluno = new Aluno;
   $obAluno->nome = $_POST['nome'];
   $obAluno->idade = $_POST['idade'];
   $obAluno->cpf = $_POST['cpf'];
@@ -15,7 +32,7 @@ if(isset($_POST['nome'])){
   $obAluno->curso = $_POST['curso'];
   $obAluno->periodo = $_POST['periodo'];
   
-  $obAluno->cadastrarAluno();
+  $obAluno->atualizarAluno();
   
   header('Location: index.php?success=true');
   exit;

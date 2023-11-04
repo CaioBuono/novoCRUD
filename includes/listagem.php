@@ -14,7 +14,7 @@
                         <a href="editar.php?id='.$aluno->id.'">
                         <button>Editar</button>
                         </a>
-                        <a href="editar.php?id='.$aluno->id.'">
+                        <a href="excluir.php?id='.$aluno->id.'">
                         <button>Excluir</button>
                         </a>
                       </td>

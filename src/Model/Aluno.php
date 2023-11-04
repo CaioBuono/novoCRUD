@@ -81,16 +81,42 @@ class Aluno{
     return true;
   }
 
+  public function atualizarAluno(){
+    (new Tabela('cadastros'))->update(
+      'id = '.$this->id, 
+      [
+        'nome'    => $this->nome,
+        'idade'   => $this->idade,
+        'cpf'     => $this->sanitizarCPF(),
+        'email'   => $this->email,
+        'curso'   => $this->curso,
+        'periodo' => $this->periodo
+      ]
+    );
+
+    return true;
+  }
+
   /**
    * Metodo responsavel por retornar os alunos do banco de dados
    * @method getAlunos
    * @param string $where
    * @param string $order
    * @param string $limit
-   * @return array
+   * @return Object
    */
   public static function getAlunos($where = null, $order = null, $limit = null){
     return (new Tabela('cadastros'))->select($where, $order, $limit)->fetchAll(PDO::FETCH_CLASS, self::class);
+  }
+
+  /**
+   * Metodo responsavel por consultar um aluno pelo id
+   * @method getAluno
+   * @param integer $id
+   * @return Object
+   */
+  public static function getAluno($id){
+    return (new Tabela('cadastros'))->select('id ='.$id)->fetchObject(self::class);
   }
 
   /**

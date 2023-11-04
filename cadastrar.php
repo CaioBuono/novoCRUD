@@ -4,10 +4,14 @@ use Apple\Services\Model\Aluno;
 
 require __DIR__ . '/vendor/autoload.php';
 
-define('TITLE', 'Voltar');
+define('BUTTON', 'Voltar');
+define('TITLE', 'Cadastrar aluno');
+define('SUBMIT', 'Cadastrar');
 
+$obAluno = new Aluno;
+
+// VALIDACAO DO POST
 if(isset($_POST['nome'])){
-  $obAluno = new Aluno;
   $obAluno->nome = $_POST['nome'];
   $obAluno->idade = $_POST['idade'];
   $obAluno->cpf = $_POST['cpf'];
