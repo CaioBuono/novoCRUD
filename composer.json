@@ -1,0 +1,9 @@
+{
+    "name": "apple/services",
+    "autoload": {
+        "psr-4": {
+            "Apple\\Services\\": "src/"
+        }
+    },
+    "require": {}
+}
